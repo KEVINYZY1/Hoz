@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vnode</title>
+</head>
+<body>
+    <div id = "old" class="{{message}}">{{message}}</div>
+    <script src="./bundle.js"></script>
+    <script>
+      function changeStore (state, action) {
+        switch (action.type) {
+            case 'CHANGE': state.message = action.data
+        }
+      }
+      var hoz = new Hoz('old', { message: 'hello'}, changeStore)
+      setTimeout(function () {
+        hoz.store.dispatch({type: 'CHANGE', data: 'change'})
+      }, 3000)
+    </script>
+</body>
+</html>
