@@ -64,6 +64,7 @@ hoz.store.dispatch({
 ```
  view -> dispatch -> action -> changeStore -> state -> view
 ```
+![state](https://github.com/HolyZheng/Hoz/blob/master/images/state.png)
 
 #### 好处
 随着应用的日益复杂，数据量的增大，如果不对数据进行相应的管理，管理不断变化的状态，是非常困难的。状态在什么时候，由于什么原因，发生了怎样的变化都难以观察。
@@ -106,3 +107,5 @@ state -> data -> publisher      一对多的关系
 
 view -> {{data}} -> subscriber
 ```
+#### hoz的整个运作图
+![state](https://github.com/HolyZheng/Hoz/blob/master/images/hoz.png)
