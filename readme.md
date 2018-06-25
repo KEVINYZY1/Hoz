@@ -4,7 +4,7 @@
 - 引入virtual dom，diff 算法，提高性能
 
 #### 声明式语法
-```
+```js
   <div id = "app">
       <div>
           <img src="{{moveImage}}" />
@@ -28,7 +28,7 @@ var state = {
 主要定义了state，action，changeStore，dispatch4个概念。
 #### state
 存放数据
-```
+```js
 var state = {
   moveName: '',
   moveImage: ''
@@ -36,7 +36,7 @@ var state = {
 ```
 #### changeStore
 相当于redux中的reducer，存放着对数据的所有操作
-```
+```js
 function changeStore (state, action) {
   switch (action.type) {
     case 'SET_NAME': {
@@ -53,7 +53,7 @@ function changeStore (state, action) {
 接收action，执行对应的方法，修改state中的数据。不同于redux的是，redux放回的是全新的state，而它是直接操作当前的state，因为state中的数据已经通过Object.defineProperty方法进行了跟踪，这个后面再将。
 #### action和dispatch
 当想要对数据进行修改的时候，我们必须通过提交action的方式，在changeStore中去修改state
-```
+```js
 hoz.store.dispatch({
   type: 'SET_NAME',
   data: '后来的我们'
@@ -61,7 +61,7 @@ hoz.store.dispatch({
 ```
 
 这个就是hoz的状态管理策略
-```
+```js
  view -> dispatch -> action -> changeStore -> state -> view
 ```
 ![state](https://github.com/HolyZheng/Hoz/blob/master/images/state.png)
@@ -76,7 +76,7 @@ hoz.store.dispatch({
 总所周知，由于dom元素的庞大，以及dom操作容易引起页面重排的原因，直接操作dom性能是非常非常差的。
 所以hoz引入了virtual dom算法，用原生的JavaScript对象去映射dom对象，因为原生JavaScript对象的操作更快更简单。
 如何映射呢？比如
-```
+```js
 class VNode {
   constructor (sel, tagName, id, className, el, children, data, text, key) {
     this.tagName = tagName // DIV
@@ -99,7 +99,7 @@ export default VNode
 
 #### 数据响应式原理
 hoz式如何做到数据的响应式的呢？这里主要通过借助Object.defineProperty方法实现了一个发布/订阅模式，通过Object.defineProperty修改state中数据的getter和setter属性，在首次渲染的时候，在getter中将对应的订阅者添加到一个主题对象中去，当数据改变的时候在setter中调用对应数据的主题对象的notify方法发布消息，通知每个订阅者更新。
-```
+```js
 state -> data -> publisher      一对多的关系
                      |
                     Dep
