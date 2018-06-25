@@ -4,7 +4,7 @@
 - 引入virtual dom，diff 算法，提高性能
 
 #### 声明式语法
-```js
+```html
   <div id = "app">
       <div>
           <img src="{{moveImage}}" />
@@ -12,7 +12,7 @@
       </div>
   </div>
 ```
-```
+```js
 var hoz = new Hoz('app', state, changeStore)
 
 var state = {
