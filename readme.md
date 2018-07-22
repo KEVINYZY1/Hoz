@@ -25,8 +25,8 @@ var state = {
 通过简洁的模板语法声明式的将数据渲染进DOM系统。
 且所有东西都是响应式的。
 
-#### 借鉴redux，flux等的思想，引入状态管理
-在状态管理方面借鉴redux的思想，实现了单向数据流的管理。
+#### 借鉴flux思想，引入状态管理
+在状态管理方面借鉴flux的思想，实现了单向数据流的管理。
 主要定义了state，action，changeStore，dispatch4个概念。
 #### state
 存放数据
@@ -37,7 +37,7 @@ var state = {
 }
 ```
 #### changeStore
-相当于redux中的reducer，存放着对数据的所有操作
+存放着对数据的所有操作
 ```js
 function changeStore (state, action) {
   switch (action.type) {
@@ -52,7 +52,7 @@ function changeStore (state, action) {
   }
 }
 ```
-接收action，执行对应的方法，修改state中的数据。不同于redux的是，redux放回的是全新的state，而它是直接操作当前的state，因为state中的数据已经通过Object.defineProperty方法进行了跟踪，这个后面再将。
+接收action，执行对应的方法，修改state中的数据。它直接操作当前的state，因为state中的数据已经通过Object.defineProperty方法进行了跟踪，这个后面再将。
 #### action和dispatch
 当想要对数据进行修改的时候，我们必须通过提交action的方式，在changeStore中去修改state
 ```js
